@@ -52,7 +52,7 @@ option(
 option(
   BACDL_BIP6
   "compile with ipv6 support"
-  ON)
+  OFF)
 
 set(BACNET_PROTOCOL_REVISION 19)
 
