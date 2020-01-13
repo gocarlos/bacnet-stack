@@ -342,8 +342,8 @@ set(BACNETSTACK_SRCS
     $<$<BOOL:${BACDL_BIP}>:src/bacnet/datalink/bip.c>
     $<$<BOOL:${BACDL_BIP6}>:src/bacnet/datalink/bvlc6.c>
     $<$<BOOL:${BACDL_BIP6}>:src/bacnet/datalink/bvlc6.h>
-    $<$<BOOL:${BACDL_BIP6}>:src/bacnet/datalink/bvlc.h>
-    $<$<BOOL:${BACDL_BIP6}>:src/bacnet/datalink/bvlc.c>
+    $<$<BOOL:${BACDL_BIP}>:src/bacnet/datalink/bvlc.h>
+    $<$<BOOL:${BACDL_BIP}>:src/bacnet/datalink/bvlc.c>
     $<$<BOOL:${BACDL_MSTP}>:src/bacnet/datalink/crc.h>
     $<$<BOOL:${BACDL_MSTP}>:src/bacnet/datalink/crc.c>
     src/bacnet/datalink/datalink.c
@@ -606,9 +606,11 @@ if(BACNET_STACK_BUILD_APPS)
               -lconfig)
   endif()
 
-  add_executable(router-ipv6 apps/router-ipv6/main.c)
-  target_link_libraries(router-ipv6 PRIVATE ${PROJECT_NAME})
-
+  if(BACDL_BIP6)
+    add_executable(router-ipv6 apps/router-ipv6/main.c)
+    target_link_libraries(router-ipv6 PRIVATE ${PROJECT_NAME})
+  endif()
+  
   add_executable(scov apps/scov/main.c)
   target_link_libraries(scov PRIVATE ${PROJECT_NAME})
 
