@@ -501,7 +501,7 @@ target_compile_definitions(
   $<$<BOOL:${BACNET_PROPERTY_LISTS}>:BACNET_PROPERTY_LISTS>
   PRIVATE
   -DPRINT_ENABLED=1)
-target_link_libraries(${PROJECT_NAME} PUBLIC $<$<BOOL:${WIN32}>:-lwsock32> Threads::Threads)
+target_link_libraries(${PROJECT_NAME} PUBLIC $<$<BOOL:${WIN32}>:wsock32> Threads::Threads)
 
 add_library(
   ${PROJECT_NAME}::${PROJECT_NAME}
